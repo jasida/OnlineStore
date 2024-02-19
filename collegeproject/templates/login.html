@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Online School Store</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active"  href="#">Home</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'register' %}">Registration</a>
+              </li>
+              <li class="nav-item">
+               <a class="nav-link active" href="{% url 'login' %}">Login</a>
+              </li>
+		       {% if user.is_authenticated %}
+		         <li class="nav-item">
+                  <a class="nav-link active" >hello {{user.username}}</a>
+                 </li>
+
+		         <li class="nav-item">
+				  <a class="nav-link active" href="{% url 'logout' %}">logout</a>
+                 </li>
+               {% endif %}
+                <li class="nav-item dropdown">
+                 <a class="nav-link dropdown-toggle nav-link active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Department</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Computer_science" target="_blank">Computer Science</a>
+                    <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Commerce" target="_blank">Commerce</a>
+                    <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Mathematics" target="_blank">Mathematics</a>
+                    <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Science" target="_blank">Science</a>
+                    <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Humanities" target="_blank">Humanities</a>
+                    <!-- Add more departments as needed -->
+                  </div>
+                </li>
+          </ul>
+        </div>
+  </div>
+</nav>
+<div class="container-fluid">
+<h1>Login Page</h1>
+<form action=" " method="post" >
+  {% csrf_token %}
+  <input type="text" name="username" placeholder="enter your username" ><br>
+  <input type="password" name="password" placeholder="enter your password" ><br>
+  <input type="submit">
+</form>
+<h4>Need an account?</h4><a href="{% url 'register' %}">Registration</a>
+
+{% for msgss in messages %}
+{{msgss}}
+{% endfor %}
+</div>
+</body>
+</html>
